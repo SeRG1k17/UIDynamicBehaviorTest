@@ -25,19 +25,23 @@ class AllBehaviorViewController: UIViewController {
     var ropeBox=[CAShapeLayer!]()
     var rope:CAShapeLayer!
     
-    //private let keyPath:String="center"
+    private let keyPath:String="center"
     
     @IBOutlet weak var barButtonItemAdd: UIBarButtonItem!
     @IBAction func barButtonActionAdd(sender: AnyObject) {
-    
+        removeObservers()
+        
         let itemView = barButtonItemAdd.valueForKey("view") as! UIView
         let box = UIView(frame: CGRectMake(itemView.frame.origin.x, itemView.frame.origin.y, BOXSIZE, BOXSIZE))
         box.backgroundColor=UIColor.greenColor()
         box.layer.cornerRadius=15
         box.layer.masksToBounds=true
+        
         self.view.addSubview(box)
         arrayBox.append(box)
+        
         COUNT+=1
+        
         addBehaviors(arrayBox)
         barButtonItemDel.enabled=true
     }
@@ -45,11 +49,16 @@ class AllBehaviorViewController: UIViewController {
     @IBOutlet weak var barButtonItemDel: UIBarButtonItem!
     @IBAction func barButtonActionDel(sender: AnyObject) {
         if COUNT>1 {
-            let tempView = arrayBox.removeLast()
-            tempView.removeFromSuperview()
-            //tempView.removeObserver(self, forKeyPath: keyPath, context: nil)
-            addBehaviors(arrayBox)
+
+            let tempBox = arrayBox.removeLast()
+            let tempRope=ropeBox.removeLast()
+            
+            tempRope.path=nil
+            tempBox.removeFromSuperview()
+            tempBox.removeObserver(self, forKeyPath: keyPath, context: nil)
+            
             COUNT-=1
+            
         } else {
             barButtonItemDel.enabled=false
         }
@@ -59,7 +68,7 @@ class AllBehaviorViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print(COUNT)
+        
         self.view.backgroundColor=UIColor.darkGrayColor()
         animator=UIDynamicAnimator(referenceView: view)
         
@@ -85,7 +94,6 @@ class AllBehaviorViewController: UIViewController {
             arrayBox.append(box)
             
             multiply+=1
-            
         }
         
         addBehaviors(arrayBox)
@@ -96,6 +104,7 @@ class AllBehaviorViewController: UIViewController {
     
     func addBehaviors(arrayBox:[UIView]) {
         animator.removeAllBehaviors()
+        
         //ADD Dynamic
         let itemsBehavior = UIDynamicItemBehavior(items: arrayBox)
         itemsBehavior.angularResistance=0.5
@@ -106,15 +115,14 @@ class AllBehaviorViewController: UIViewController {
         animator.addBehavior(itemsBehavior)
         
         //ADD GRAVITY
-        //        let gravity = UIGravityBehavior(items: arrayBox)
-        //        animator.addBehavior(gravity)
+//        let gravity = UIGravityBehavior(items: arrayBox)
+//        animator.addBehavior(gravity)
         
         //ADD COLLISION
         let collision = UICollisionBehavior(items: arrayBox)
         collision.collisionMode = .Everything
         collision.translatesReferenceBoundsIntoBoundary=true
         animator.addBehavior(collision)
-        
         
         //ADD ATTACHMENT to first view
         attachment=UIAttachmentBehavior(item: arrayBox.first!, attachedToAnchor: arrayBox.first!.center)
@@ -132,11 +140,10 @@ class AllBehaviorViewController: UIViewController {
             attach.damping=1
             attach.frequency=3
             animator.addBehavior(attach)
-            
+            //let options = NSKeyValueObservingOptions([.New, .Old, .Initial, .Prior])
+            arrayBox[i].addObserver(self, forKeyPath:keyPath, options: .New, context:nil)
         }
-        let options = NSKeyValueObservingOptions([.New,.Old])
         
-        arrayBox[4].addObserver(self, forKeyPath:"4", options: options, context:nil)
     }
     
     func addPan(pan:UIGestureRecognizer) {
@@ -159,34 +166,35 @@ class AllBehaviorViewController: UIViewController {
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        print("WAS in observer")
         
-        //for i in 1..<arrayBox.count {
-        if rope == nil {
-            rope=CAShapeLayer()
-            rope.fillColor=UIColor.clearColor().CGColor
-            rope.lineJoin=kCALineJoinRound
-            rope.lineWidth=2.0
-            rope.strokeColor=UIColor.whiteColor().CGColor
-            rope.strokeEnd=1.0
-            self.view.layer.addSublayer(rope)
-            //ropeBox.append(rope)
+        if keyPath==self.keyPath {
+            while ropeBox.count+1 != arrayBox.count  {
+                let ropeBetwenViews = CAShapeLayer()
+                ropeBetwenViews.fillColor=UIColor.clearColor().CGColor
+                ropeBetwenViews.lineJoin=kCALineJoinRound
+                ropeBetwenViews.lineWidth=2.0
+                ropeBetwenViews.strokeColor=UIColor.whiteColor().CGColor
+                ropeBetwenViews.strokeEnd=1.0
+                self.view.layer.addSublayer(ropeBetwenViews)
+                ropeBox.append(ropeBetwenViews)
+            }
+            for (i,rp) in ropeBox.enumerate() {
+                let bezierPath = UIBezierPath()
+                bezierPath.moveToPoint(arrayBox[i].center)
+                bezierPath.addLineToPoint(arrayBox[i+1].center)
+                rp.path=bezierPath.CGPath
+            }
+        } else {
+            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
         }
-        
-        let bezierPath = UIBezierPath()
-        bezierPath.moveToPoint(arrayBox[3].center)
-        bezierPath.addLineToPoint(arrayBox[4].center)
-        rope.path=bezierPath.CGPath
-        ropeBox.append(rope)
-        //}
     }
-    
-    deinit {
-        arrayBox[4].removeObserver(self, forKeyPath:"4", context:nil)
-        
-        for i in 0..<arrayBox.count {
-            
+    func removeObservers() {
+        for i in 1..<arrayBox.count {
+            arrayBox[i].removeObserver(self, forKeyPath:keyPath, context:nil)
         }
+    }
+    deinit {
+        removeObservers()
     }
 
 
