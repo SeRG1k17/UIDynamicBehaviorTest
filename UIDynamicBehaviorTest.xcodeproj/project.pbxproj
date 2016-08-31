@@ -8,20 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		708551181D761D7E00CC98AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708551171D761D7E00CC98AF /* AppDelegate.swift */; };
-		7085511A1D761D7E00CC98AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708551191D761D7E00CC98AF /* ViewController.swift */; };
 		7085511D1D761D7E00CC98AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7085511B1D761D7E00CC98AF /* Main.storyboard */; };
 		7085511F1D761D7E00CC98AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7085511E1D761D7E00CC98AF /* Assets.xcassets */; };
 		708551221D761D7E00CC98AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708551201D761D7E00CC98AF /* LaunchScreen.storyboard */; };
+		7085512A1D7627D600CC98AF /* AttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708551291D7627D600CC98AF /* AttachmentViewController.swift */; };
+		70F5361B1D76C2600084C3FB /* SnapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5361A1D76C2600084C3FB /* SnapViewController.swift */; };
+		70F5361D1D76C6930084C3FB /* PushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5361C1D76C6930084C3FB /* PushViewController.swift */; };
+		70F5361F1D76CACF0084C3FB /* CollisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F5361E1D76CACF0084C3FB /* CollisionViewController.swift */; };
+		70F536211D76CC810084C3FB /* GravityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F536201D76CC810084C3FB /* GravityViewController.swift */; };
+		70F536231D76D9BB0084C3FB /* AllBehaviorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F536221D76D9BB0084C3FB /* AllBehaviorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		708551141D761D7E00CC98AF /* UIDynamicBehaviorTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIDynamicBehaviorTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		708551171D761D7E00CC98AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		708551191D761D7E00CC98AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7085511C1D761D7E00CC98AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7085511E1D761D7E00CC98AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		708551211D761D7E00CC98AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		708551231D761D7E00CC98AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		708551291D7627D600CC98AF /* AttachmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentViewController.swift; sourceTree = "<group>"; };
+		70F5361A1D76C2600084C3FB /* SnapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapViewController.swift; sourceTree = "<group>"; };
+		70F5361C1D76C6930084C3FB /* PushViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushViewController.swift; sourceTree = "<group>"; };
+		70F5361E1D76CACF0084C3FB /* CollisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollisionViewController.swift; sourceTree = "<group>"; };
+		70F536201D76CC810084C3FB /* GravityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GravityViewController.swift; sourceTree = "<group>"; };
+		70F536221D76D9BB0084C3FB /* AllBehaviorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllBehaviorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +65,12 @@
 			isa = PBXGroup;
 			children = (
 				708551171D761D7E00CC98AF /* AppDelegate.swift */,
-				708551191D761D7E00CC98AF /* ViewController.swift */,
+				70F536201D76CC810084C3FB /* GravityViewController.swift */,
+				70F5361E1D76CACF0084C3FB /* CollisionViewController.swift */,
+				708551291D7627D600CC98AF /* AttachmentViewController.swift */,
+				70F5361A1D76C2600084C3FB /* SnapViewController.swift */,
+				70F5361C1D76C6930084C3FB /* PushViewController.swift */,
+				70F536221D76D9BB0084C3FB /* AllBehaviorViewController.swift */,
 				7085511B1D761D7E00CC98AF /* Main.storyboard */,
 				7085511E1D761D7E00CC98AF /* Assets.xcassets */,
 				708551201D761D7E00CC98AF /* LaunchScreen.storyboard */,
@@ -136,8 +151,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7085511A1D761D7E00CC98AF /* ViewController.swift in Sources */,
+				70F5361B1D76C2600084C3FB /* SnapViewController.swift in Sources */,
+				70F5361F1D76CACF0084C3FB /* CollisionViewController.swift in Sources */,
 				708551181D761D7E00CC98AF /* AppDelegate.swift in Sources */,
+				70F5361D1D76C6930084C3FB /* PushViewController.swift in Sources */,
+				7085512A1D7627D600CC98AF /* AttachmentViewController.swift in Sources */,
+				70F536231D76D9BB0084C3FB /* AllBehaviorViewController.swift in Sources */,
+				70F536211D76CC810084C3FB /* GravityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +271,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = UIDynamicBehaviorTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SergeyPugach.UIDynamicBehaviorTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -262,6 +283,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = UIDynamicBehaviorTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.SergeyPugach.UIDynamicBehaviorTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -287,6 +309,7 @@
 				708551281D761D7E00CC98AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
